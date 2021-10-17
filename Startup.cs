@@ -8,10 +8,12 @@ using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
-using UofLMentorshipProgram.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using UofLMentorshipProgram.Data;
+using MySqlConnector;
+using UofLMentorshipProgram.Models.Options;
 
 namespace UofLMentorshipProgram
 {
@@ -27,13 +29,16 @@ namespace UofLMentorshipProgram
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlite(
-                    Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDatabaseDeveloperPageExceptionFilter();
-
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddDbContext<MentorshipContext>((sp, options) => {
+                var csb = new MySqlConnectionStringBuilder(Configuration.GetConnectionString("Mentorship"));
+                csb.Add("Pwd", Configuration.GetSection("DB:Mentorship").Get<DBOptions>().Password);
+                options.UseMySql(csb.ConnectionString, ServerVersion.AutoDetect(csb.ConnectionString));
+            });
+            services.AddDbContext<MentorshipContext>((sp, options) => {
+                var csb = new MySqlConnectionStringBuilder(Configuration.GetConnectionString("WordPress"));
+                csb.Add("Pwd", Configuration.GetSection("DB:Mentorship").Get<DBOptions>().Password);
+                options.UseMySql(csb.ConnectionString, ServerVersion.AutoDetect(csb.ConnectionString));
+            });
             services.AddControllersWithViews();
         }
 
@@ -56,15 +61,11 @@ namespace UofLMentorshipProgram
 
             app.UseRouting();
 
-            app.UseAuthentication();
-            app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
-                endpoints.MapRazorPages();
             });
         }
     }

@@ -1,0 +1,11 @@
+{
+  "name": "uoflmentorshipprogram",
+  "version": "0.0.0",
+  "description": "The dotnet parts of the mentorship program, otherwise built primarily in WordPress",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kent Loofbourrow, Roger Young",
+  "license": "ISC"
+}

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using UofLMentorshipProgram.Data;
 using UofLMentorshipProgram.Models;
 
 namespace UofLMentorshipProgram.Controllers
@@ -12,10 +13,12 @@ namespace UofLMentorshipProgram.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly MentorshipContext mentorshipContext;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, MentorshipContext mentorshipContext)
         {
             _logger = logger;
+            this.mentorshipContext = mentorshipContext;
         }
 
         public IActionResult Index()

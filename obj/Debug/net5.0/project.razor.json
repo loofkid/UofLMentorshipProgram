@@ -15657,11 +15657,6 @@
       "FilePath": "/Users/kentloofbourrow/source/repos/UofLMentorshipProgram/Views/_ViewStart.cshtml",
       "TargetPath": "Views\\_ViewStart.cshtml",
       "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/Users/kentloofbourrow/source/repos/UofLMentorshipProgram/Areas/Identity/Pages/_ViewStart.cshtml",
-      "TargetPath": "Areas\\Identity\\Pages\\_ViewStart.cshtml",
-      "FileKind": "mvc"
     }
   ],
   "SerializationFormat": "0.2"
