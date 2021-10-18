@@ -15639,11 +15639,6 @@
       "FileKind": "mvc"
     },
     {
-      "FilePath": "/Users/kentloofbourrow/source/repos/UofLMentorshipProgram/Views/Shared/_LoginPartial.cshtml",
-      "TargetPath": "Views\\Shared\\_LoginPartial.cshtml",
-      "FileKind": "mvc"
-    },
-    {
       "FilePath": "/Users/kentloofbourrow/source/repos/UofLMentorshipProgram/Views/Home/Index.cshtml",
       "TargetPath": "Views\\Home\\Index.cshtml",
       "FileKind": "mvc"
