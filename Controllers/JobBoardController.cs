@@ -25,11 +25,21 @@ namespace Controllers
         }
 
         [HttpPost("jobposting")]
-        public async Task<IActionResult> AddJobPosting(JobPosting jobPosting) { 
+        public async Task<IActionResult> AddJobPosting(JobPosting jobPosting) 
+        { 
             var jobPostingEntity = (await mentorshipContext.JobPostings.AddAsync(jobPosting)).Entity;
             await mentorshipContext.SaveChangesAsync();
 
             return CreatedAtAction(Url.Action($"jobposting/{jobPostingEntity.Id}"), jobPostingEntity);
         }
+
+        [HttpGet("jobposting")]
+        public async Task<IActionResult> GetJobPostingbyID(int id) 
+        {
+            return Ok(await mentorshipContext.JobPostings.FindAsync(id));
+        }
+
+        [HttpPost("jobposting")]
+        
     }
 }
