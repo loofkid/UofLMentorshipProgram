@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using UofLMentorshipProgram.Data;
 
 namespace Controllers
 {
@@ -6,6 +7,11 @@ namespace Controllers
     [Route("api/[controller]")]
     public class JobBoardController : ControllerBase
     {
-        
+        private readonly MentorshipContext mentorshipContext;
+
+        public JobBoardController(MentorshipContext mentorshipContext)
+        {
+            this.mentorshipContext = mentorshipContext;
+        }
     }
 }
