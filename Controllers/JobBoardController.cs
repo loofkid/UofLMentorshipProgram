@@ -25,8 +25,7 @@ namespace Controllers
         }
 
         [HttpPost("jobposting")]
-        public async Task<IActionResult> AddJobPosting(SubmitModel input) {
-            var jobPosting = new JobPosting()// map submitmodel to jobposting
+        public async Task<IActionResult> AddJobPosting(JobPosting jobPosting) { 
             var jobPostingEntity = (await mentorshipContext.JobPostings.AddAsync(jobPosting)).Entity;
             await mentorshipContext.SaveChangesAsync();
 
