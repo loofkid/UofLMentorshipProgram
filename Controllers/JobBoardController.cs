@@ -25,7 +25,7 @@ namespace Controllers
         }
 
         [HttpPost("jobposting")]
-        public async Task<IActionResult> AddJobPosting(JobPosting jobPosting) 
+        public async Task<IActionResult> CreateJobPosting(JobPosting jobPosting) 
         { 
             var jobPostingEntity = (await mentorshipContext.JobPostings.AddAsync(jobPosting)).Entity;
             await mentorshipContext.SaveChangesAsync();
@@ -33,13 +33,20 @@ namespace Controllers
             return CreatedAtAction(Url.Action($"jobposting/{jobPostingEntity.Id}"), jobPostingEntity);
         }
 
-        [HttpGet("jobposting")]
+        [HttpGet("jobposting/{id}")]
         public async Task<IActionResult> GetJobPostingbyID(int id) 
         {
             return Ok(await mentorshipContext.JobPostings.FindAsync(id));
         }
 
         [HttpPost("jobposting")]
-        
+        public async Task<IActionResult> UpdateJobPosting(int id)
+        {
+            var jobPostingEntity = await mentorshipContext.JobPostings.FirstOrDefaultAsync( j => j.Id == id);
+            await mentorshipContext.SaveChangesAsync();
+
+            return CreatedAtAction(Url.Action($"jobposting/{jobPostingEntity.Id}"), jobPostingEntity);
+        }
+
     }
 }
