@@ -40,13 +40,24 @@ namespace Controllers
         }
 
         [HttpPost("jobposting")]
-        public async Task<IActionResult> UpdateJobPosting(int id)
+        public async Task<IActionResult> UpdateJobPosting(int? id)
         {
             var jobPostingEntity = await mentorshipContext.JobPostings.FirstOrDefaultAsync( j => j.Id == id);
-            await mentorshipContext.SaveChangesAsync();
 
+            if (await TryUpdateModelAsync<JobPosting>(jobPostingEntity,
+                "", 
+                j => j.Business, j => j.JobTitle, j => j.JobDescription, j => j.JobType, j => j.Pay, j => j.Industry, j => j.Function, j => j.City, j => j.State, j => j.OpenDate, j => j.CloseDate, j => j.StartDate))
+            {
+                try
+                {
+                    await mentorshipContext.SaveChangesAsync();
+                }
+                catch (DbUpdateException ex)
+                {
+                    var Exception = ex.Message;
+                }
+            }
             return CreatedAtAction(Url.Action($"jobposting/{jobPostingEntity.Id}"), jobPostingEntity);
         }
-
     }
 }
