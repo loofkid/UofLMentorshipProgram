@@ -39,9 +39,10 @@ namespace Controllers
             return Ok(await mentorshipContext.JobPostings.FindAsync(id));
         }
 
+        [HttpPatch("jobposting")]
         public async Task<IActionResult> UpdateJobPosting(JobPosting jobPosting)
         {
-            var jobPostingEntity = (mentorshipContext.JobPostings.Update(jobPosting)).Entity;
+            var jobPostingEntity = mentorshipContext.JobPostings.Update(jobPosting).Entity;
             await mentorshipContext.SaveChangesAsync();
 
             return CreatedAtAction(Url.Action($"jobposting/{jobPostingEntity.Id}"), jobPostingEntity);
