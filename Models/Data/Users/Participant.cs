@@ -10,5 +10,8 @@ namespace UofLMentorshipProgram.Models.Data.Users
             NationalOrigin = Array.Empty<NationalOrigin>();
         }
         public NationalOrigin[] NationalOrigin { get; set; }
+        public Hobby[] Hobbies { get; set; }
+        
+        
     }
 }
