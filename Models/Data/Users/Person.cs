@@ -15,6 +15,8 @@ namespace UofLMentorshipProgram.Models.Data.Users
         public string LastName { get; set; }
         
         public string EmailAddress { get; set; }
+
+        public DateTime BirthDate { get; set; }
         
         public Ethnicity[] Ethnicity { get; set; }
         

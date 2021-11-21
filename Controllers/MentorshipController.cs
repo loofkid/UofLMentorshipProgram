@@ -6,6 +6,7 @@ namespace Controllers
     [Route("api/[controller]")]
     public class MentorshipController : ControllerBase
     {
+        [HttpGet("hobbies")]
         
     }
 }
